@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,16 +12,13 @@
       padding: 20px;
       text-align: center;
     }
-
     h1 {
       font-size: 1.8em;
       margin-bottom: 10px;
     }
-
     .button-bar {
       margin-bottom: 20px;
     }
-
     .button-bar button {
       background-color: #a33232;
       color: white;
@@ -31,28 +29,24 @@
       cursor: pointer;
       font-weight: bold;
     }
-
     .form-group {
       margin-bottom: 15px;
       text-align: left;
       max-width: 500px;
       margin-inline: auto;
     }
-
     label {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
     }
-
-    input {
+    input[type="text"] {
       width: 100%;
       padding: 10px;
       border: none;
       border-radius: 4px;
       font-size: 1em;
     }
-
     #prompt-output {
       margin-top: 20px;
       background-color: #fdf5cf;
@@ -61,32 +55,6 @@
       border-radius: 6px;
       max-width: 700px;
       margin-inline: auto;
-    }
-
-    #example-thumbnails {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      gap: 10px;
-    }
-
-    #example-thumbnails img {
-      width: 80px;
-      height: 80px;
-      border-radius: 4px;
-      object-fit: cover;
-    }
-
-    #refresh-examples {
-      margin-top: 10px;
-      background-color: #a33232;
-      color: white;
-      padding: 6px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
     }
   </style>
 </head>
@@ -101,58 +69,63 @@
   </div>
 
   <div class="form-group">
-    <label for="grid">Grid Type</label>
-    <input id="grid" placeholder="e.g., faint 5-ft square grid, hex grid, no grid">
+    <label>Grid Type</label>
+    <label><input type="radio" name="gridType" value="be gridless" checked> Gridless</label>
+    <label><input type="radio" name="gridType" value="include a faint 5 foot square grid overlay"> Square Grid</label>
+    <label><input type="radio" name="gridType" value="include a faint 5 foot hex grid overlay"> Hex Grid</label>
+  
+  </div>
+
+  <div class="form-group">
+    <label for="mapsize">Map Size</label>
+    <input type="text" id="mapsize" placeholder="e.g., 10x10, 30x20, 60x60">
   </div>
 
   <div class="form-group">
     <label for="biome">Setting / Biome</label>
-    <input id="biome" placeholder="e.g., forest, tundra, mountain pass, town square">
+    <input type="text" id="biome" placeholder="e.g., forest, tundra, mountain pass, town square">
   </div>
 
   <div class="form-group">
     <label for="timeofday">Time of Day</label>
-    <input id="timeofday" placeholder="e.g., dawn, dusk, midnight, overcast afternoon">
+    <input type="text" id="timeofday" placeholder="e.g., dawn, dusk, midnight, overcast afternoon">
   </div>
 
   <div class="form-group">
     <label for="features">Specific Features</label>
-    <input id="features" placeholder="e.g., broken bridge, glowing mushrooms, campsite, altar">
+    <input type="text" id="features" placeholder="e.g., broken bridge, glowing mushrooms, campsite, altar">
   </div>
 
   <div id="prompt-output">Your generated prompt will appear here.</div>
 
-  <div id="example-thumbnails">
-    <img src="examples/map1.jpg" alt="example 1">
-    <img src="examples/map2.jpg" alt="example 2">
-    <img src="examples/map3.jpg" alt="example 3">
-    <img src="examples/map4.jpg" alt="example 4">
-  </div>
-  <button id="refresh-examples" onclick="refreshExamples()">Show Different Examples</button>
-
   <script>
     function generatePrompt() {
-      const grid = document.getElementById('grid').value;
       const biome = document.getElementById('biome').value;
       const timeofday = document.getElementById('timeofday').value;
+      const mapsize = document.getElementById('mapsize').value;
       const features = document.getElementById('features').value;
 
-      const prompt = `Generate a detailed top-down TTRPG battle map for use in virtual tabletops. The map should feature a ${biome} setting with features such as ${features}, depicted during ${timeofday}. Style it as a full-color digital illustration with clean linework, rich textures, and natural lighting. The map should include a ${grid}. Use a semi-realistic fantasy art style similar to those seen on Patreon (Nat20Dungeons, AfternoonMaps, Czepeku, etc.). Emphasize varied terrain elevation, distinct environmental elements, and tactical space suitable for D&D 5e or Pathfinder gameplay.`;
+      let gridType = '';
+      const radios = document.getElementsByName('gridType');
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          gridType = radios[i].value;
+          break;
+        }
+      }
+
+      const prompt = `Generate a detailed top-down TTRPG battle map for use in virtual tabletops. The map should be approximately ${mapsize} in size and feature a ${biome} setting with features such as ${features}, depicted during ${timeofday}. Style it as a full-color digital illustration with clean linework, rich textures, and natural lighting. The map should ${gridType}. Use a semi-realistic fantasy art style similar to those seen on Patreon (Nat20Dungeons, AfternoonMaps, Czepeku, etc.). Emphasize varied terrain elevation, distinct environmental elements, and tactical space suitable for D&D 5e or Pathfinder gameplay.`;
 
       document.getElementById('prompt-output').innerText = prompt;
     }
 
     function clearFields() {
-      document.querySelectorAll('input').forEach(input => input.value = '');
+      document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
       document.getElementById('prompt-output').innerText = 'Your generated prompt will appear here.';
     }
 
     function generateRandom() {
       alert('Random generation coming soon!');
-    }
-
-    function refreshExamples() {
-      alert('Refresh examples coming soon!');
     }
   </script>
 

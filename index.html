@@ -45,7 +45,7 @@
       font-weight: bold;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 10px;
       border: none;
@@ -101,34 +101,28 @@
   </div>
 
   <div class="form-group">
-    <label for="biome">Biome or Setting Type</label>
-    <input id="biome" placeholder="e.g., forest, dungeon, swamp">
-  </div>
-
-  <div class="form-group">
-    <label for="feature">Specific Feature</label>
-    <input id="feature" placeholder="e.g., river crossing, jungle ruin, crypt gate">
-  </div>
-
-  <div class="form-group">
     <label for="grid">Grid Type</label>
-    <input id="grid" placeholder="e.g., faint 5-ft square, no grid, hex grid">
+    <input id="grid" placeholder="e.g., faint 5-ft square grid, hex grid, no grid">
   </div>
 
   <div class="form-group">
-    <label for="style">Art Style Reference</label>
-    <input id="style" placeholder="e.g., Czepeku, Nat20Dungeons, AfternoonMaps">
+    <label for="biome">Setting / Biome</label>
+    <input id="biome" placeholder="e.g., forest, tundra, mountain pass, town square">
   </div>
 
   <div class="form-group">
-    <label for="system">Game System</label>
-    <input id="system" placeholder="e.g., D&D 5e, Pathfinder">
+    <label for="timeofday">Time of Day</label>
+    <input id="timeofday" placeholder="e.g., dawn, dusk, midnight, overcast afternoon">
+  </div>
+
+  <div class="form-group">
+    <label for="features">Specific Features</label>
+    <input id="features" placeholder="e.g., broken bridge, glowing mushrooms, campsite, altar">
   </div>
 
   <div id="prompt-output">Your generated prompt will appear here.</div>
 
   <div id="example-thumbnails">
-    <!-- Example map images go here -->
     <img src="examples/map1.jpg" alt="example 1">
     <img src="examples/map2.jpg" alt="example 2">
     <img src="examples/map3.jpg" alt="example 3">
@@ -138,13 +132,12 @@
 
   <script>
     function generatePrompt() {
-      const biome = document.getElementById('biome').value;
-      const feature = document.getElementById('feature').value;
       const grid = document.getElementById('grid').value;
-      const style = document.getElementById('style').value;
-      const system = document.getElementById('system').value;
+      const biome = document.getElementById('biome').value;
+      const timeofday = document.getElementById('timeofday').value;
+      const features = document.getElementById('features').value;
 
-      const prompt = `Generate a detailed top-down TTRPG battle map for use in virtual tabletops. The map should feature a ${biome} setting such as a ${feature}. Style it as a full-color digital illustration with clean linework, rich textures, and natural lighting. The map should include a ${grid}. Use a semi-realistic fantasy art style similar to ${style}. Emphasize variety in terrain elevation, environmental features, and tactical space. The map should be designed for use in systems like ${system}.`;
+      const prompt = `Generate a detailed top-down TTRPG battle map for use in virtual tabletops. The map should feature a ${biome} setting with features such as ${features}, depicted during ${timeofday}. Style it as a full-color digital illustration with clean linework, rich textures, and natural lighting. The map should include a ${grid}. Use a semi-realistic fantasy art style similar to those seen on Patreon (Nat20Dungeons, AfternoonMaps, Czepeku, etc.). Emphasize varied terrain elevation, distinct environmental elements, and tactical space suitable for D&D 5e or Pathfinder gameplay.`;
 
       document.getElementById('prompt-output').innerText = prompt;
     }
@@ -155,12 +148,10 @@
     }
 
     function generateRandom() {
-      // Add random generation logic later
       alert('Random generation coming soon!');
     }
 
     function refreshExamples() {
-      // Optional: Hook up to a random map loader
       alert('Refresh examples coming soon!');
     }
   </script>

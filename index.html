@@ -114,7 +114,8 @@
         }
       }
 
-      const prompt = `Generate a detailed top-down TTRPG battle map for use in virtual tabletops. The map should be approximately ${mapsize} in size and feature a ${biome} setting with features such as ${features}, depicted during ${timeofday}. Style it as a full-color digital illustration with clean linework, rich textures, and natural lighting. The map should ${gridType}. Use a semi-realistic fantasy art style similar to those seen on Patreon (Nat20Dungeons, AfternoonMaps, Czepeku, etc.). Emphasize varied terrain elevation, distinct environmental elements, and tactical space suitable for D&D 5e or Pathfinder gameplay.`;
+      const prompt = `Enhance this prompt and then generate a battle map based off the enhanced prompt. 
+      Generate a detailed top-down view TTRPG battle map for use in virtual tabletops. The map should be approximately ${mapsize} in size and feature a ${biome} setting with features such as ${features}, depicted during ${timeofday}. Style it as a full-color digital illustration with , rich textures, and dynamic natural lighting. The map should ${gridType}. Use a realistic fantasy art style similar to those seen on battle maps made with Dungeon Draft. Emphasize varied terrain elevation, distinct environmental elements, and tactical space suitable for D&D 5e or Pathfinder gameplay. The battle map must be a top-down veiw without isometric elements.`;
 
       document.getElementById('prompt-output').innerText = prompt;
     }
